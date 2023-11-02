@@ -1,18 +1,23 @@
 const containerEl = document.querySelector('.container')
-const gridLength = 16
-for (let rowId = 0; rowId < gridLength; rowId++) {
-    const rowEl = document.createElement("div")
-    rowEl.classList.add('row')
-    for (let cellId = 0; cellId < gridLength; cellId++) {
-        const cellEl = document.createElement("div")
-        cellEl.classList.add('cell')
-        cellEl.addEventListener('mouseover', () => {
-            changeColor(cellEl)
-        })
-        rowEl.appendChild(cellEl)
+
+const createGrid = gridLength => {
+    containerEl.innerHTML = ''
+    for (let rowId = 0; rowId < gridLength; rowId++) {
+        const rowEl = document.createElement("div")
+        rowEl.classList.add('row')
+        for (let cellId = 0; cellId < gridLength; cellId++) {
+            const cellEl = document.createElement("div")
+            cellEl.classList.add('cell')
+            cellEl.addEventListener('mouseover', () => {
+                changeColor(cellEl)
+            })
+            rowEl.appendChild(cellEl)
+        }
+        containerEl.appendChild(rowEl)
     }
-    containerEl.appendChild(rowEl)
 }
+const startingGridLength = 16
+createGrid(startingGridLength)
 
 const changeColor = el => {
     let hexNumbers = [
@@ -40,3 +45,12 @@ const changeColor = el => {
       }
     el.style.backgroundColor = `#${hexColorCode}`
 }
+
+const sizeChangeBtn = document.getElementById('size')
+sizeChangeBtn.addEventListener('click', () => {
+    let gridLength = prompt('Please enter a grid length', 16)
+    if (gridLength > 100) {
+        gridLength = 100
+    }
+    createGrid(gridLength)
+})
