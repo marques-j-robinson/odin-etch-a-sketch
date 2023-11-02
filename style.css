@@ -1,14 +1,17 @@
 .container {
     display: flex;
     flex-direction: column;
+    max-width: 960px;
+    height: 100vh;
+    margin: 0 auto;
 }
 
 .row {
     display: flex;
+    flex: 1;
 }
 
 .cell {
     border: 1px black solid;
-    width: 40px;
-    height: 40px;
+    flex: 1;
 }
